@@ -426,14 +426,7 @@ function InitPlateau() {
   });
 
   const conteneur3 = document.getElementsByClassName("turn");
-  const im3 = document.createElement("img");
-  im3.src = "./images/play.png";
-  im3.style.background = "transparent"; // Ajustez la valeur entre 0 et 1 pour changer le niveau de transparence
 
-  im3.style.width = "100%";
-  im3.style.height = "90%";
-  im3.className = "carte";
-  conteneur3[0].appendChild(im3);
   conteneur3[0].addEventListener("click", function () {
     //Si c'est le tour du joueur
     if (joueurIndex == 0) {
@@ -443,14 +436,6 @@ function InitPlateau() {
       console.log("Attendez votre tour pour pouvoir passer.");
     }
   });
-
-  const conteneur4 = document.getElementById("changeTour");
-  const im4 = document.createElement("img");
-  im4.src = "./images/flecheD.jpg";
-  im4.style.width = "90%";
-  im4.style.height = "90%";
-  im4.className = "carte";
-  conteneur4.appendChild(im4);
 
   jeuAff("tour-jeu", "tour du joueur " + joueurIndex);
   jeuAff("couleur", couleur);
@@ -595,7 +580,7 @@ function majP(nombre) {
     //Si main plus grande
     if (tailleMain > childe.length) {
       // on ajoute une div
-      for (var i = childe.length; i < tailleMain; i++) {
+      for (var i = childe.length - 1; i < tailleMain; i++) {
         console.log("taille de la main " + tailleMain);
         console.log(i);
         const newDiv = document.createElement("div");
@@ -921,6 +906,32 @@ function victoire(i) {
     window.location.reload();
   });
 }
+
+// Obtenez la fenêtre modale
+var modal = document.getElementById("myModal");
+
+// Obtenez le bouton qui ouvre la fenêtre modale par son ID
+var btn = document.getElementById("changeTour");
+
+// Obtenez l'élément <span> qui ferme la fenêtre modale
+var span = document.getElementsByClassName("close")[0];
+
+// Lorsque l'utilisateur clique sur le bouton, ouvrez la fenêtre modale
+btn.onclick = function () {
+  modal.classList.add("show"); // Ajoute la classe show pour afficher le modal
+};
+
+// Lorsque l'utilisateur clique sur <span> (x), fermez la fenêtre modale
+span.onclick = function () {
+  modal.classList.remove("show"); // Supprime la classe show pour masquer le modal
+};
+
+// Lorsque l'utilisateur clique n'importe où en dehors de la fenêtre modale, fermez-la
+window.onclick = function (event) {
+  if (event.target == modal) {
+    modal.classList.remove("show"); // Supprime la classe show pour masquer le modal
+  }
+};
 
 InitPlateau();
 
